@@ -93,8 +93,15 @@ func (v *{{.NameTitle}}Slice) At(i int) *{{.Name}} {
 	}
 	return v.s[i]
 }
+func (v *{{.NameTitle}}Slice) GetItem(i int) Any {
+	if i < 0 || i >= len(v.s) {
+		fmt.Printf("Vapi::{{.Name}}Slice field_values.go invalid index %d\n", i)
+	}
+	return v.s[i]
 
-func (v *{{.NameTitle}}Slice) objectsSlice() []{{.Name}} {
+}
+
+func (v *{{.NameTitle}}Slice) OjectsSlice() []{{.Name}} {
 	res := make([]{{.Name}}, 0, len(v.s))
 	for _, i := range v.s {
 		if i == nil {
@@ -105,7 +112,7 @@ func (v *{{.NameTitle}}Slice) objectsSlice() []{{.Name}} {
 	return res
 }
 
-func new{{.NameTitle}}SliceWithObjects(objects []{{.Name}}) *{{.NameTitle}}Slice {
+func New{{.NameTitle}}SliceWithObjects(objects []{{.Name}}) *{{.NameTitle}}Slice {
 	pSlice := make([]*{{.Name}}, 0, len(objects))
 	for _, i := range objects {
 		j := i
